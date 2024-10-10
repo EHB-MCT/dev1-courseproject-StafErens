@@ -18,4 +18,3 @@ function Signature() {
     context.fillRect(75, 75, 50, 50);
     context.fillRect(275, 75, 50, 50);
 }
-//To EZ compared to 1-6
