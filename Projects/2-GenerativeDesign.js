@@ -18,12 +18,14 @@ function Grid() {
     context.lineWidth = 5;
     for (let i = 0; i < 30; i+= 1) {
         context.beginPath();
-
-        for (let j = 0; j < window.outerHeight; j+= 50) {
+        let RX = Utils.randomNumber(2, 20)
+        for (let j = 0; j < window.outerHeight; j+= RX) {
+            
             let y = Noise.perlinNoise(j / 100) * 200 - 200;
                 context.lineTo(y + i * 100, j);
                 context.stroke();
-                //Instead of making a new lines I used rectangles as lines...
+                //Instead of making a new lines I used rectangles as line
+                //to try and make a illusion that the horizantal...
                 context.fillStyle = "black"
                 context.fillRect(y + i * 100, j, 200, 5)
             
