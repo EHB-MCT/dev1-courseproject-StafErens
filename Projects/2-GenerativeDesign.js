@@ -18,7 +18,7 @@ function Grid() {
     context.lineWidth = 5;
     for (let i = 0; i < 30; i+= 1) {
         context.beginPath();
-        let RX = Utils.randomNumber(2, 20)
+        let RX = Utils.randomNumber(5, 30)
         for (let j = 0; j < window.outerHeight; j+= RX) {
             
             let y = Noise.perlinNoise(j / 100) * 200 - 200;
