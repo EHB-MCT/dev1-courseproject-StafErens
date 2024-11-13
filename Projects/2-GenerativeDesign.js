@@ -17,7 +17,7 @@ function Grid() {
     context.strokeStyle = "black";
     context.lineWidth = 5;
 
-    for (let i = 0; i < 30; i+= 1) {
+    for (let i = 0; i < window.outerWidth / 90; i+= 1) {
         context.beginPath();
         let RX = Utils.randomNumber(5, 30)
 
@@ -29,7 +29,7 @@ function Grid() {
                 context.stroke();
                 //Instead of making a new lines I used rectangles as lines
                 context.fillStyle = "black";
-                context.fillRect(y + i * 100, j, 200, 5) 
+                context.fillRect(y + i * 100, j, 100, 5) 
         }
     }
 }
