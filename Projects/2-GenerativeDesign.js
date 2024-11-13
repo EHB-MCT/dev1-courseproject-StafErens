@@ -22,6 +22,7 @@ function Grid() {
         let RX = Utils.randomNumber(5, 30)
 
         for (let j = 0; j < window.outerHeight; j+= 50) {
+            //Used spacing and stroke line to get a more pointy look for the noise
             let RX = Utils.randomNumber(1, 100)
             let y = Noise.perlinNoise(j / 100) * 200 - 200;
                 context.lineTo(y + i * 100, j);
