@@ -10,7 +10,7 @@ import * as Noise from "../../scripts/noise.js";
 //Noise scripts and other scripts from Solutions https://github.com/EHB-MCT/DEV1_Solutions_24.git
 
 
-ColorBackground());
+ColorBackground();
 Grid();
 
 function Grid() {
