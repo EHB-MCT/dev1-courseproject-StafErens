@@ -10,7 +10,7 @@ import * as Noise from "../../scripts/noise.js";
 //Noise scripts and other scripts from Solutions https://github.com/EHB-MCT/DEV1_Solutions_24.git
 
 
-Color();
+ColorBackground());
 Grid();
 
 function Grid() {
@@ -33,7 +33,7 @@ function Grid() {
     }
 }
 
-function Color() {
+function ColorBackground() {
     let RX = Utils.randomNumber(2, 10)
 
         for (let i = 0; i < 25; i+= 1) {
