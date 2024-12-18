@@ -15,7 +15,8 @@ let play = true
 let Ysig = window.innerHeight;
 let Xsig = window.innerWidth;
 //color random start
-let RX = Utils.randomNumber(2, 1000)
+let RX = 1
+let rand = Utils.randomNumber(2, 100)
 //Perlin noise intensitie 
 let PeI = 100
 
@@ -40,7 +41,7 @@ function Grid() {
 
         for (let j = 0; j < window.outerHeight + 100 ; j+= 50) {
             //Used spacing and stroke line to get a more pointy look for the noise
-            let y = Noise.perlinNoise(j / PeI ) * 200 + - 200 ;
+            let y = Noise.perlinNoise(j / PeI * rand) * 200 + - 200 ;
                 context.lineTo(y + i * 100, j);
                 context.stroke();
                 //Instead of making a new lines I used rectangles as lines
@@ -56,7 +57,7 @@ function ColorBackground() {
     
 
         for (let i = 0; i < 25; i+= 1) {
-            context.fillStyle = Utils.hsl(200, 1  + RX * i , 50);
+            context.fillStyle = Utils.hsl(20 * rand, 1  + RX * i , 50);
             context.fillRect(0, 0 + 50 * i, window.outerWidth, 100) 
         }    
 }
@@ -66,7 +67,7 @@ function move(eventData) {
     let y = eventData.pageX;
     console.log (x)
     console.log (y)
-    PeI = y/ 0.5
+    PeI = y/ 0.05
     RX = x/100
     console.log (RX)
 }
@@ -75,6 +76,9 @@ function Animation() {
  if (play) {
     ColorBackground()
     Grid()
+    rand+= 0.04
+
+    
     Signature()
     requestAnimationFrame(Animation)
 
@@ -97,3 +101,15 @@ function Signature() {
     context.fillRect(Xsig - 275, Ysig - 275, 50, 50);
 }
 
+
+function drawMickey(x, y, size, mirrored = false) {
+    let half = size / 2;
+    fillEllipse(x, y, size, size);
+    if (mirrored) {
+       fillEllipse(x - size, y + size, half, half);
+       fillEllipse(x + size, y + size, half, half);
+    } else {
+       fillEllipse(x - size, y - size, half, half);
+       fillEllipse(x + size, y - size, half, half);
+    }
+ }
