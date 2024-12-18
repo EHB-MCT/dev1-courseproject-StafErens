@@ -15,13 +15,15 @@ let play = true
 let Ysig = window.innerHeight;
 let Xsig = window.innerWidth;
 //color random start
-let RX = 1
+let CY = 1
 let rand = Utils.randomNumber(2, 100)
 //Perlin noise intensitie 
 let PeI = 100
-let XH = Utils.randomNumber(200, Xsig-200)
-let YH = Utils.randomNumber(200, Ysig-200)
+// square head start position 
+let XH = 10
+let YH = 10
 let sizeH = 10
+
 window.onmousemove = move;
 
 /**
@@ -55,19 +57,17 @@ function ColorBackground() {
     
 
         for (let i = 0; i < 25; i+= 1) {
-            context.fillStyle = Utils.hsl(20 * rand, 1  + RX * i , 50);
+            context.fillStyle = Utils.hsl(20 * rand, 1  + CY * i , 50);
             context.fillRect(0, 0 + 50 * i, window.outerWidth, 100) 
         }    
 }
 
+//mouse position calc
 function move(eventData) {
     let x = eventData.pageY;
     let y = eventData.pageX;
-    console.log (x)
-    console.log (y)
-    PeI = y/ 0.05
-    RX = x/100
-    console.log (RX)
+    PeI = y/ 0.05 //grid wave effect
+    CY = x/100 // color cycle
 }
 
 function Animation() {
@@ -76,11 +76,11 @@ function Animation() {
     Grid()
     rand+= 0.04
 
-    
     Signature()
     squarehead(XH, YH, sizeH)
     
     if (sizeH > 200) {
+        //squarehead random position after reset at size 200
         XH = Utils.randomNumber(50, Xsig-50)
         YH = Utils.randomNumber(50, Ysig-50)
         sizeH = 10
@@ -88,12 +88,9 @@ function Animation() {
         else {
         sizeH++
         }
-    
     requestAnimationFrame(Animation)
-
  }
 }
-
 
 // copied from milestone 1 and adjusted to make it easily moveable to anywhere
 function Signature() {
@@ -110,9 +107,8 @@ function Signature() {
     context.fillRect(Xsig - 275, Ysig - 275, 50, 50);
 }
 
-
 function squarehead(x,y,size){
-context.fillStyle = "black";
+context.fillStyle = Utils.hsl(XH, YH, 50);
 context.fillRect(x, y, size , size)
 context.fillStyle = "white";
 context.fillRect(x , y + size / 1.5, size / 1.2, size/6)
