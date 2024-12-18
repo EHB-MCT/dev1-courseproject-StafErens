@@ -102,14 +102,3 @@ function Signature() {
 }
 
 
-function drawMickey(x, y, size, mirrored = false) {
-    let half = size / 2;
-    fillEllipse(x, y, size, size);
-    if (mirrored) {
-       fillEllipse(x - size, y + size, half, half);
-       fillEllipse(x + size, y + size, half, half);
-    } else {
-       fillEllipse(x - size, y - size, half, half);
-       fillEllipse(x + size, y - size, half, half);
-    }
- }
