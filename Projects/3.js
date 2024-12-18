@@ -19,9 +19,9 @@ let RX = 1
 let rand = Utils.randomNumber(2, 100)
 //Perlin noise intensitie 
 let PeI = 100
-
-
-
+let XH = Utils.randomNumber(200, Xsig-200)
+let YH = Utils.randomNumber(200, Ysig-200)
+let sizeH = 10
 window.onmousemove = move;
 
 /**
@@ -51,8 +51,6 @@ function Grid() {
     }
 }
 
-
-
 function ColorBackground() {
     
 
@@ -80,6 +78,17 @@ function Animation() {
 
     
     Signature()
+    squarehead(XH, YH, sizeH)
+    
+    if (sizeH > 200) {
+        XH = Utils.randomNumber(50, Xsig-50)
+        YH = Utils.randomNumber(50, Ysig-50)
+        sizeH = 10
+    }
+        else {
+        sizeH++
+        }
+    
     requestAnimationFrame(Animation)
 
  }
@@ -102,3 +111,13 @@ function Signature() {
 }
 
 
+function squarehead(x,y,size){
+context.fillStyle = "black";
+context.fillRect(x, y, size , size)
+context.fillStyle = "white";
+context.fillRect(x , y + size / 1.5, size / 1.2, size/6)
+context.fillRect(x , y + size/3, size / 6, size / 6)
+context.fillRect(x + size/2, y + size/3, size / 6, size / 6)
+
+
+}
