@@ -9,14 +9,26 @@ import * as Utils from "../../scripts/utils.js";
 import * as Noise from "../../scripts/noise.js";
 //Noise scripts and other scripts from Solutions https://github.com/EHB-MCT/DEV1_Solutions_24.git
 
+//animation
 let play = true
-let Ysig= window.innerHeight;
+//position signature
+let Ysig = window.innerHeight;
 let Xsig = window.innerWidth;
+//color random start
+let RX = Utils.randomNumber(2, 1000)
+//Perlin noise intensitie 
+let PeI = 100
 
-ColorBackground();
-Grid();
 
-Signature();
+
+window.onmousemove = move;
+
+/**
+ * 
+ * @param {MouseEvent} eventData 
+ */
+
+Animation()
 
 
 function Grid() {
@@ -26,9 +38,9 @@ function Grid() {
     for (let i = 0; i < window.outerWidth / 90; i+= 1) {
         context.beginPath();
 
-        for (let j = 0; j < window.outerHeight; j+= 50) {
+        for (let j = 0; j < window.outerHeight + 100 ; j+= 50) {
             //Used spacing and stroke line to get a more pointy look for the noise
-            let y = Noise.perlinNoise(j / 100) * 200 - 200;
+            let y = Noise.perlinNoise(j / PeI ) * 200 + - 200 ;
                 context.lineTo(y + i * 100, j);
                 context.stroke();
                 //Instead of making a new lines I used rectangles as lines
@@ -38,8 +50,10 @@ function Grid() {
     }
 }
 
+
+
 function ColorBackground() {
-    let RX = Utils.randomNumber(2, 10)
+    
 
         for (let i = 0; i < 25; i+= 1) {
             context.fillStyle = Utils.hsl(200, 1  + RX * i , 50);
@@ -47,18 +61,28 @@ function ColorBackground() {
         }    
 }
 
+function move(eventData) {
+    let x = eventData.pageY;
+    let y = eventData.pageX;
+    console.log (x)
+    console.log (y)
+    PeI = y/ 0.5
+    RX = x/100
+    console.log (RX)
+}
+
 function Animation() {
  if (play) {
     ColorBackground()
-
+    Grid()
+    Signature()
     requestAnimationFrame(Animation)
 
  }
 }
 
-console.log(Ysig)
-console.log(Xsig)
 
+// copied from milestone 1 and adjusted to make it easily moveable to anywhere
 function Signature() {
     context.fillStyle = "#000000";
     context.fillRect(Xsig - 300, Ysig - 300, 300, 300);
@@ -72,3 +96,4 @@ function Signature() {
     context.fillRect(Xsig - 75, Ysig - 275, 50, 50);
     context.fillRect(Xsig - 275, Ysig - 275, 50, 50);
 }
+
